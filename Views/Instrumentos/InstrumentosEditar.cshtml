@@ -1,0 +1,92 @@
+﻿@model InstrumentosModel;
+@{
+    ViewData["Title"] = "Instrumentos";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/coleta.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Instrumentos</title>
+    <style>
+        /* Estilos para a tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            color: #333;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        input {
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: transparent;
+            font-size: 14px;
+            color: #333;
+        }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+    </style>
+
+</head>
+<body class="body">
+    <form method="post" asp-controller="Instrumentos" asp-action="editarInstrumentos" asp-route-id="@Model.Id">
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>Validade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" asp-for="codigo" value="@Model.codigo" readonly/></td>
+                    <td><input class="form-control" asp-for="descricao" value="@Model.descricao" /></td>
+                    <td><input class="form-control" asp-for="validade" value="@Model.validade" /></td>
+
+                </tr>
+            </tbody>
+
+        </table>
+        <br />
+        <div class="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Dados</button>
+        </div>
+    </form>
+</body>
+</html>
+@if (TempData.ContainsKey("Mensagem"))
+{
+    <script>
+        alert('@Html.Raw(TempData["Mensagem"])');
+    </script>
+}

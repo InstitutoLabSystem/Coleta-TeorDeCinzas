@@ -1,3 +1,7 @@
+using Coleta_TeorDeCinzas.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+
 namespace Coleta_TeorDeCinzas
 {
     public class Program
@@ -6,8 +10,25 @@ namespace Coleta_TeorDeCinzas
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<BancoContext>
+            (options => options.UseMySql(
+                "server=novolab.c82dqw5tullb.sa-east-1.rds.amazonaws.com;user id=Sistemas;password=#7847awsE2024;database=labdados",
+                Microsoft.EntityFrameworkCore.ServerVersion.Parse("13.2.0-mysql")));
+
+            builder.Services.AddDbContext<QuimicoContext>(options =>
+               options.UseMySql(
+                 "server=novolab.c82dqw5tullb.sa-east-1.rds.amazonaws.com;user id=Sistemas;password=#7847awsE2024;database=quimico",
+                 Microsoft.EntityFrameworkCore.ServerVersion.Parse("13.2.0-mysql")));
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddAuthentication(
+             CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+             {
+                 option.LoginPath = "/Acess/Index";
+                 option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+             });
 
             var app = builder.Build();
 
@@ -28,7 +49,7 @@ namespace Coleta_TeorDeCinzas
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Acess}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -1,0 +1,101 @@
+﻿body {
+    background: #f0f0f0;
+    font-family:Arial;
+}
+.tables {
+    background: white;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 5px auto;
+    width: 70%;
+    font-size: 1em;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra */
+}
+
+.fundo-tabela {
+    background-color: #800000;
+    color:white;
+}
+
+
+.tables th, .tables td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #bfbfbf;
+}
+
+.form-control {
+    padding: 5px;
+    border-color: black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 40px;
+}
+.controlador{
+    padding: 5px;
+    border-color: gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 40px;
+    width:50%;
+}
+
+.areaProva {
+    padding: 5px;
+    border-color: gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 40px;
+    width: 200px;
+    
+}
+
+.tables th td {
+    background-color: #800000;
+    color: white;
+}
+
+  
+
+.imagem {
+    max-width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+input {
+    border: 1px solid #990000;
+    width: auto;
+    height:auto;
+}
+
+.form-control.w-100.mr-2.input {
+    width: 100%; 
+    height: 100px; 
+    resize: none; 
+}
+
+
+.form-control.w-100.mr-2.input {
+    padding: 5px; 
+}
+
+
+.altura-input {
+    height: 200px;
+    margin-bottom:90px;
+}
+
+.altura-input-centralizar {
+    align-items: center;
+}
+
+.itens{
+    width:40px;
+    font-weight:bold;
+}
+

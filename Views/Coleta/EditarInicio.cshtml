@@ -1,0 +1,140 @@
+﻿@model InicioColetaModel;
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Editar coleta";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/coleta.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Carga Estática Vertical</title>
+    <style>
+        input {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" asp-controller="Coleta" asp-action="editarInicio" asp-route-os="@ViewBag.os" asp-route-orcamento="@ViewBag.orcamento">
+        <table class="tables table-bordered border-secondary  table-sm">
+            <thead>
+                <tr>
+                    <td><img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" /></td>
+                    <td colspan="3" class="fundo-tabela">Coleta De Dados</td>
+                    <td class="fundo-tabela">N Os:</td>
+                </tr>
+                <tr>
+                    <td colspan="4">Determinação de teor de cinzas</td>
+                    <td rowspan="2"> @ViewBag.os</td>
+                </tr>
+                <tr>
+                    <td>Inicio:</td>
+                    <td><input class="form-control" type="date" asp-for="data_ini" /></td>
+                    <td>Termino:</td>
+                    <td><input class="form-control" type="date" asp-for="data_term" /></td>
+                </tr>
+            </thead>
+        </table>
+        <br />
+
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td colspan="3">Informação sobre o ensaio</td>
+            </tr>
+            <tr>
+                <td class="fundo-tabela">Ensaio a ser realizado:</td>
+                <td>Determinação de teor de cinzas</td>
+            </tr>
+            <tr>
+                <td class="fundo-tabela">Refêrencia normativa:</td>
+                <td><input class="form-control" asp-for="normativa" readonly value="ABNT NBT 13579-1 de 15 de Agosto de 2011" /></td>
+            </tr>
+            <tr>
+                <td rowspan="2" class="fundo-tabela">Documentos complementares:</td>
+                <td><input class="form-control" asp-for="complementar" readonly value="ABNT NBR 14961 de 28 de Novembro de 2019" /></td>
+
+            </tr>
+            <tr>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td class="fundo-tabela">Nota: </td>
+                <td>Resultado expresso em (%)</td>
+            </tr>
+            <tr>
+                <td class="fundo-tabela">Incerteza de medição: </td>
+                <td>Cime: <input asp-for="cime" readonly value="500" style="width:110px;" /> &nbsp;  Incerteza do ensaio: <input asp-for="inceterza" readonly value="U = 0,067%" style="width:110px;" /></td>
+            </tr>
+            <tr>
+                <td class="fundo-tabela">Executor do ensaio: </td>
+                <td><input class="form-control" readonly value="@ViewBag.usuario_sessao" /></td>
+            </tr>
+        </table>
+        <Br />
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td colspan="7">Condições ambientais</td>
+            </tr>
+            <tr class="fundo-tabela">
+                <td rowspan="2">Parâmetros</td>
+                <td colspan="3">Condionamento da amostra</td>
+                <td colspan="3">Execução do ensaio</td>
+            </tr>
+            <tr class="fundo-tabela">
+                <td>Critério</td>
+                <td>Mínimo</td>
+                <td>Maximo</td>
+                <td>Critério</td>
+                <td>Mínimo</td>
+                <td>Maximo</td>
+            </tr>
+            <tr>
+                <td>Temperatura (°C)</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>20 ± 5</td>
+                <td><input class="form-control" asp-for="minimo" /></td>
+                <td><input class="form-control" asp-for="maximo" /></td>
+            </tr>
+            <tr>
+                <td>Umidade (%)</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+            </tr>
+        </table>
+        <div class="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar</button>
+        </div>
+    </form>
+    <script>
+        document.addEventListener("keydown", function (e) {
+            if (e.keyCode === 13) {
+
+                e.preventDefault();
+
+            }
+        });
+    </script>
+    @if (TempData.ContainsKey("Mensagem"))
+    {
+        <script>
+
+            alert('@Html.Raw(TempData["Mensagem"])');
+
+        </script>
+    }
+</body>
+</html>
+
+
+
