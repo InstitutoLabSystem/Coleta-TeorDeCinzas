@@ -1,6 +1,7 @@
 using Coleta_TeorDeCinzas.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Coleta_TeorDeCinzas
 {
@@ -22,6 +23,20 @@ namespace Coleta_TeorDeCinzas
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //passando de ponto para virgula no sistema, forma padrao.
+            var cultureInfo = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            builder.Services.AddControllersWithViews()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.WriteIndented = true;
+
+            });
+            //termina aqui.
 
             builder.Services.AddAuthentication(
              CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
