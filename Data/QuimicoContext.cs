@@ -10,5 +10,7 @@ namespace Coleta_TeorDeCinzas.Data
         }
         public DbSet<InicioColetaModel> registro_teor_cinzas { get; set; }
         public DbSet<InstrumentosModel> instrumentos_teor_cinzas { get; set; }
+        public DbSet<ColetaModel> coleta_teor_cinzas { get; set; }
+        public DbSet<InformacaoInstrumentos> instrumentos_teor_cinza_informacao { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ColetaViewModel;
+@{
     Layout = null;
 }
 @{
@@ -19,129 +20,181 @@
     </style>
 </head>
 <body>
-    <table class="tables table-bordered border-secondary  table-sm">
-        <thead>
-            <tr>
-                <td><img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" /></td>
-                <td colspan="3" class="fundo-tabela">Coleta De Dados</td>
-                <td class="fundo-tabela">N Os:</td>
-            </tr>
-            <tr>
-                <td colspan="4">Determinação de teor de cinzas</td>
-                <td rowspan="2"> @ViewBag.os</td>
-            </tr>
-       @*      <tr>
+    <form method="post" asp-controller="Coleta" asp-action="salvarColeta" asp-route-os="@ViewBag.os" asp-route-orcamento="@ViewBag.orcamento">
+        <table class="tables table-bordered border-secondary  table-sm"> 
+            <thead>
+                <tr>
+                    <td><img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" /></td>
+                    <td colspan="3" class="fundo-tabela">Coleta De Dados</td>
+                    <td class="fundo-tabela">N Os:</td>
+                </tr>
+                <tr>
+                    <td colspan="4">Determinação de teor de cinzas</td>
+                    <td rowspan="2"> @ViewBag.os</td>
+                </tr>
+                @*      <tr>
                 <td>Inicio:</td>
                 <td><input class="form-control" type="date" /></td>
                 <td>Termino:</td>
                 <td><input class="form-control" type="date" /></td>
-            </tr> *@
-        </thead>
-    </table>
-    <br />
+                </tr> *@
+            </thead>
+        </table>
+        <br />
 
-    <table class="tables table-bordered border-secondary  table-sm">
-        <tr class="fundo-tabela">
-            <td colspan="4">Parâmetro(s) de ensaio</td>
-        </tr>
-        <tr class="fundo-tabela">
-            <td>Condicionamento inicial do cadinho:</td>
-            <td>≥ 10 min. a (550 ± 50) °C</td>
-            <td>Condicionamento após a queima:</td>
-            <td>≥ 1 h. a (550 ± 50) °C</td>
-        </tr>
-        <tr>
-            <td>Encontrado:</td>
-            <td><input class="form-control" /></td>
-            <td>Encontrado:</td>
-            <td><input class="form-control" /></td>
-        </tr>
-        <tr>
-            <td>Limite de quantificação:</td>
-            <td><input class="form-control" value="0,33%" readonly /></td>
-        </tr>
-    </table>
-    <br />
-    <table class="tables table-bordered border-secondary  table-sm">
-        <tr class="fundo-tabela">
-            <td colspan="4">Resultados obtidos</td>
-        </tr>
-        <tr class="fundo-tabela">
-            <td>ABNT NBR 14961 Item:</td>
-            <td>Variáveis</td>
-            <td>Amostra</td>
-            <td>Duplicata</td>
-        </tr>
-        <tr>
-            <td rowspan="3">2.2</td>
-            <td>Massa do cadinho vazio [ M1 ], em g : </td>
-            <td><input class="form-control" /></td>
-            <td><input class="form-control" /></td>
-        </tr>
-        <tr>
-            <td>Massa da amostra com cadinho [ Me ], em g : </td>
-            <td><input class="form-control" /></td>
-            <td><input class="form-control" /></td>
-        </tr>
-        <tr>
-            <td>Massa do cadinho com as cinzas [ M2 ], em g : </td>
-            <td><input class="form-control" /></td>
-            <td><input class="form-control" /></td>
-        </tr>
-        <tr>
-            <td rowspan="2">2.3</td>
-            <td>Teor de cinzas (%), em g : </td>
-            <td><input class="form-control" readonly /></td>
-            <td><input class="form-control" readonly /></td>
-        </tr>
-        <tr>
-            <td>Resultado declarado (%c), em g : </td>
-            <td colspan="2"><input class="form-control" readonly /></td>
-        </tr>
-    </table>
-    <br />
-    <table class="tables table-bordered border-secondary  table-sm">
-        <tr class="fundo-tabela">
-            <td>Observações</td>
-        </tr>
-        <tr>
-            <td>
-                <textarea class="form-control" rows="3" id="obs">Sem observações.</textarea>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <table class="tables table-bordered border-secondary  table-sm">
-        <tr class="fundo-tabela">
-            <td>Observações</td>
-        </tr>
-        <tr>
-            <td>
-                <textarea  class="form-control" rows="4" id="conformidade">O(s) resultado(s) obtido(s) atende(m) a(s) exigência(s) da ABNT NBR 13579-1 de 15 de Agosto de 2011 – Ensaio de determinação do teor de cinzas.</textarea>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <table class="tables table-bordered border-secondary  table-sm">
-        <tr class="fundo-tabela">
-            <td>Regras de decisão</td>
-        </tr>
-        <tr>
-            <td>
-                <textarea class="form-control" rows="4" id="regras">Na declaração de conformidade não foi considerada a incerteza de medição.</textarea>
-            </td>
-        </tr>
-    </table>
-    <div class="d-grid gap-2 d-flex justify-content-center">
-        <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Dados</button>
-    </div>
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td colspan="4">Parâmetro(s) de ensaio</td>
+            </tr>
+            <tr class="fundo-tabela">
+                <td>Condicionamento inicial do cadinho:</td>
+                <td>≥ 10 min. a (550 ± 50) °C</td>
+                <td>Condicionamento após a queima:</td>
+                <td>≥ 1 h. a (550 ± 50) °C</td>
+            </tr>
+            <tr>
+                <td>Encontrado:</td>
+                <td><input class="form-control" asp-for="oColeta.parametro_enc" /></td>
+                <td>Encontrado:</td>
+                <td><input class="form-control" asp-for="oColeta.parametro_enc_dois" /></td>
+            </tr>
+            <tr>
+                <td>Limite de quantificação:</td>
+                <td><input class="form-control" value="0,33%" readonly /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td colspan="4">Resultados obtidos</td>
+            </tr>
+            <tr class="fundo-tabela">
+                <td>ABNT NBR 14961 Item:</td>
+                <td>Variáveis</td>
+                <td>Amostra</td>
+                <td>Duplicata</td>
+            </tr>
+            <tr>
+                <td rowspan="3">2.2</td>
+                <td>Massa do cadinho vazio [ M1 ], em g : </td>
+                <td><input class="form-control" asp-for="oColeta.amostra_um"/></td>
+                <td><input class="form-control" asp-for="oColeta.duplicata_um" /></td>
+            </tr>
+            <tr>
+                <td>Massa da amostra com cadinho [ Me ], em g : </td>
+                <td><input class="form-control" asp-for="oColeta.amostra_dois" /></td>
+                <td><input class="form-control" asp-for="oColeta.duplicata_dois" /></td>
+            </tr>
+            <tr>
+                <td>Massa do cadinho com as cinzas [ M2 ], em g : </td>
+                <td><input class="form-control" asp-for="oColeta.amostra_tres" /></td>
+                <td><input class="form-control" asp-for="oColeta.duplicata_tres" /></td>
+            </tr>
+            <tr>
+                <td rowspan="2">2.3</td>
+                <td>Teor de cinzas (%), em g : </td>
+                <td><input class="form-control" readonly asp-for="oColeta.amostra_quatro" /></td>
+                <td><input class="form-control" readonly asp-for="oColeta.duplicata_quatro" /></td>
+            </tr>
+            <tr>
+                <td>Resultado declarado (%c), em g : </td>
+                <td colspan="2"><input class="form-control" readonly asp-for="oColeta.resultado" /></td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td colspan="3">Instrumento(s) e equipamentos(s)</td>
+            </tr>
+            <tr class="fundo-tabela">
+                <td>IM / DE / EE</td>
+                <td>DESCRIÇÃO</td>
+                <td>VALIDADE</td>
+            </tr>
+            @if(Model.oInstrumentoInformacao.Count == 0)
+            {
+                @for (int i = 0; i < Model.oInstrumento.Count; i++)
+                {
+                    <tr>
+                        <td><input class="form-control" readonly value="@Model.oInstrumento[i].codigo" asp-for="oInstrumento[i].codigo" /></td>
+                        <td>
+                            <input class="form-control" readonly value="@Model.oInstrumento[i].descricao" asp-for="oInstrumento[i].descricao" />
+                        </td>
+                        <td><input class="form-control" readonly value="@Model.oInstrumento[i].validade" asp-for="oInstrumento[i].validade" /></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                @for (int i = 0; i < Model.oInstrumentoInformacao.Count; i++)
+                {
+                    <tr>
+                        <td><input class="form-control" readonly value="@Model.oInstrumentoInformacao[i].codigo" asp-for="oInstrumentoInformacao[i].codigo" /></td>
+                        <td>
+                            <input class="form-control" readonly value="@Model.oInstrumentoInformacao[i].descricao" asp-for="oInstrumentoInformacao[i].descricao" />
+                        </td>
+                        <td><input class="form-control" readonly value="@Model.oInstrumentoInformacao[i].validade" asp-for="oInstrumentoInformacao[i].validade" /></td>
+                    </tr>
+                }
+            }
+          
+        </table>
+        <br />
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td>Observações</td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea class="form-control" rows="3" id="obs" asp-for="oColeta.observacao"></textarea>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td>Declaração de conformidade</td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" asp-for="oColeta.conformidade">
+                        <option>---</option>
+                        <option>O(s) resultado(s) obtido(s) atende(m) a(s) exigência(s) da ABNT NBR 13579-1 de 15 de Agosto de 2011 – Ensaio de determinação do teor de cinzas.</option>
+                        <option>O(s) resultado(s) obtido(s) não atende(m) a(s) exigência(s) da ABNT NBR 13579-1 de 15 de Agosto de 2011 – Ensaio de determinação do teor de cinzas.</option>
+                        <option>Não Aplicavel</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table class="tables table-bordered border-secondary  table-sm">
+            <tr class="fundo-tabela">
+                <td>Regras de decisão</td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" asp-for="oColeta.decisao">
+                        <option>---</option>
+                        <option>Na declaração de conformidade foi considerada a incerteza de medição.</option>
+                        <option>Na declaração de conformidade não foi considerada a incerteza de medição.</option>
+                        <option>Não Aplicavel</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Dados</button>
+        </div>
+    </form>
 </body>
+
 </html>
 <script>
-    // var obs = document.getElementById("obs");
+    var obs = document.getElementById("obs");
     // var conformidade = document.getElementById("conformidade");
     // var regras = document.getElementById("regras");
-    // obs.value = "Sem observações";
+    obs.value = "Sem observações";
     // conformidade.value = "Sem observações";
     // regras.value = "Na declaração de conformidade não foi considerada a incerteza de medição.
 </script>

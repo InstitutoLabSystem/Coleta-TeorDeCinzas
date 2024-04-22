@@ -39,7 +39,7 @@ namespace Coleta_TeorDeCinzas.Controllers
         {
             if (salvar.codigo == null)
             {
-                TempData["Mensagem"] = "o codigo nao pode estar vazio";
+                TempData["Mensagem"] = "o codigo não pode estar vazio";
             }
 
             _quimicoContext.instrumentos_teor_cinzas.Add(salvar);
