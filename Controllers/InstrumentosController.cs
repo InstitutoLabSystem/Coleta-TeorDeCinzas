@@ -46,18 +46,17 @@ namespace Coleta_TeorDeCinzas.Controllers
             await _quimicoContext.SaveChangesAsync();
 
             TempData["Mensagem"] = "Dados salvo com sucesso";
-            return RedirectToAction("instrumentosEditar", "Instrumentos",new {salvar.Id});
+            return RedirectToAction("instrumentosEditar", "Instrumentos", new { salvar.Id });
         }
 
 
         [HttpPost]
         public async Task<IActionResult> editarInstrumentos(int? Id, InstrumentosModel editar)
         {
-            if (ModelState.IsValid)
-            {
-                _quimicoContext.instrumentos_teor_cinzas.Update(editar);
-                await _quimicoContext.SaveChangesAsync();
-            }
+
+            _quimicoContext.instrumentos_teor_cinzas.Update(editar);
+            await _quimicoContext.SaveChangesAsync();
+
             TempData["Mensagem"] = "Dados editado com sucesso";
             return View("InstrumentosEditar", editar);
         }

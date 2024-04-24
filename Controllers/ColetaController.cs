@@ -26,7 +26,7 @@ namespace Coleta_TeorDeCinzas.Controllers
             var model = new ColetaViewModel();
             model.oColeta = obterColeta(os, orcamento);
             model.oInstrumento = ObterInstrumentos();
-            model.oInstrumentoInformacao = ObterInstrumentosInformacao(os,orcamento);
+            model.oInstrumentoInformacao = ObterInstrumentosInformacao(os, orcamento);
 
 
             var usuario_sessao = User.FindFirstValue(ClaimTypes.Name);
@@ -63,7 +63,7 @@ namespace Coleta_TeorDeCinzas.Controllers
         private List<InformacaoInstrumentos> ObterInstrumentosInformacao(string os, string orcamento)
         {
             var instrumentosInformacao = _quimicoContext.instrumentos_teor_cinza_informacao.
-                Where(x=>x.os == os && x.orcamento == orcamento).ToList();
+                Where(x => x.os == os && x.orcamento == orcamento).ToList();
             return instrumentosInformacao;
         }
 
@@ -107,6 +107,7 @@ namespace Coleta_TeorDeCinzas.Controllers
                     editarDados.data_term = salvar.data_term;
                     editarDados.minimo = salvar.minimo;
                     editarDados.maximo = salvar.maximo;
+                    editarDados.auxiliar = salvar.auxiliar;
 
                     _quimicoContext.registro_teor_cinzas.Update(editarDados);
                     await _quimicoContext.SaveChangesAsync();
@@ -119,8 +120,6 @@ namespace Coleta_TeorDeCinzas.Controllers
                     TempData["Mensagem"] = "Erro ao editar";
                     return RedirectToAction("EditarInicio", "Coleta", new { os, orcamento });
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -138,10 +137,10 @@ namespace Coleta_TeorDeCinzas.Controllers
                 var dados = _quimicoContext.coleta_teor_cinzas.Where(x => x.os == os && x.orcamento == orcamento).FirstOrDefault();
 
                 if (dados == null)
-                {                 
+                {
                     //manipulando os resultados aqui.
-                    salvarDados.oColeta.amostra_quatro = (float)Math.Round(((salvarDados.oColeta.amostra_tres - salvarDados.oColeta.amostra_um) / (salvarDados.oColeta.amostra_dois - salvarDados.oColeta.amostra_um)*100),2);
-                    salvarDados.oColeta.duplicata_quatro = (float)Math.Round(((salvarDados.oColeta.duplicata_tres - salvarDados.oColeta.duplicata_um) / (salvarDados.oColeta.duplicata_dois - salvarDados.oColeta.duplicata_um)*100),2);
+                    salvarDados.oColeta.amostra_quatro = (float)Math.Round(((salvarDados.oColeta.amostra_tres - salvarDados.oColeta.amostra_um) / (salvarDados.oColeta.amostra_dois - salvarDados.oColeta.amostra_um) * 100), 2);
+                    salvarDados.oColeta.duplicata_quatro = (float)Math.Round(((salvarDados.oColeta.duplicata_tres - salvarDados.oColeta.duplicata_um) / (salvarDados.oColeta.duplicata_dois - salvarDados.oColeta.duplicata_um) * 100), 2);
                     float? maior = null;
 
                     if (salvarDados.oColeta.amostra_quatro > salvarDados.oColeta.duplicata_quatro)
@@ -153,7 +152,7 @@ namespace Coleta_TeorDeCinzas.Controllers
                         maior = salvarDados.oColeta.duplicata_quatro;
                     }
                     //verificando o resultado.
-                    if(maior >= 0.33)
+                    if (maior >= 0.33)
                     {
                         salvarDados.oColeta.resultado = maior.ToString();
                     }
@@ -187,7 +186,8 @@ namespace Coleta_TeorDeCinzas.Controllers
                     _quimicoContext.coleta_teor_cinzas.Add(salvarColeta);
 
                     //TRABALHANDO COM A LISTA DE INSTRUMENTOS PARA SALVAR.
-                    for (int i = 0; i< salvarDados.oInstrumento.Count; i++) {
+                    for (int i = 0; i < salvarDados.oInstrumento.Count; i++)
+                    {
                         //salvando os instrumentos, na tabela
                         var salvarInstrumentos = new InformacaoInstrumentos
                         {
@@ -195,7 +195,7 @@ namespace Coleta_TeorDeCinzas.Controllers
                             orcamento = orcamento,
                             codigo = salvarDados.oInstrumento[i].codigo,
                             descricao = salvarDados.oInstrumento[i].descricao,
-                            validade = salvarDados.oInstrumento[i].validade,
+                            validade = (DateOnly)salvarDados.oInstrumento[i].validade,
                         };
 
                         //SALVAR O ARRAY DO INSTRUMENTOS NO BANCO
@@ -204,7 +204,7 @@ namespace Coleta_TeorDeCinzas.Controllers
 
                     await _quimicoContext.SaveChangesAsync();
                     TempData["Mensagem"] = "Dados salvo com sucesso";
-                    return RedirectToAction("Coleta", "Coleta" , new {os,orcamento});
+                    return RedirectToAction("Coleta", "Coleta", new { os, orcamento });
                 }
                 else
                 {
@@ -222,7 +222,7 @@ namespace Coleta_TeorDeCinzas.Controllers
 
                     //realizando calculo de conta.
                     dados.amostra_quatro = (float)Math.Round((((dados.amostra_tres - dados.amostra_um) / (dados.amostra_dois - dados.amostra_um)) * 100), 2);
-                    dados.duplicata_quatro = (float)Math.Round((((dados.duplicata_tres - dados.duplicata_um) / (dados.duplicata_dois - dados.duplicata_um)) * 100), 2);              
+                    dados.duplicata_quatro = (float)Math.Round((((dados.duplicata_tres - dados.duplicata_um) / (dados.duplicata_dois - dados.duplicata_um)) * 100), 2);
 
                     //pegando o maior numero
                     if (dados.amostra_quatro > dados.duplicata_quatro)

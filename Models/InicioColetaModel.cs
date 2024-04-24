@@ -17,5 +17,6 @@ namespace Coleta_TeorDeCinzas.Models
         public float minimo { get; set; }
         public float maximo { get; set; }
         public string? executador { get; set; }
+        public string? auxiliar { get; set; }
     }
 }
