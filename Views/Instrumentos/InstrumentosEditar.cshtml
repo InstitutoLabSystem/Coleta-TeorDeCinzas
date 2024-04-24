@@ -69,10 +69,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input class="form-control" asp-for="codigo" value="@Model.codigo" readonly/></td>
+                    <td><input class="form-control" asp-for="codigo" value="@Model.codigo" readonly /></td>
                     <td><input class="form-control" asp-for="descricao" value="@Model.descricao" /></td>
-                    <td><input class="form-control" asp-for="validade" value="@Model.validade" /></td>
-
+                    @if (Model.validade != null)
+                    {
+                        <td><input class="form-control" asp-for="validade" value="@Model.validade" /></td>
+                    }
+                    else
+                    {
+                        <td><input class="form-control" asp-for="validade" value="Não Requer" /></td>
+                    }
                 </tr>
             </tbody>
 

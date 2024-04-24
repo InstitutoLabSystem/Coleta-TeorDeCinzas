@@ -76,7 +76,13 @@
                 <tr>
                     <td> @Model[i].codigo </td>
                     <td> @Model[i].descricao </td>
-                    <td>@Model[i].validade</td>
+                    @if(Model[i].validade != null)
+                    {
+                        <td>@Model[i].validade</td>
+                    }else{
+                        <td>Não Requer</td>
+                    }
+                    
                     <td>
                         <a role="submit" target="_blank" class="btn btn-success" asp-controller="Instrumentos" asp-action="InstrumentosCriar">Criar</a>
                     </td>
