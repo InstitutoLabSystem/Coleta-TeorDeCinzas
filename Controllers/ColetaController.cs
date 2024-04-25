@@ -188,7 +188,11 @@ namespace Coleta_TeorDeCinzas.Controllers
                     //TRABALHANDO COM A LISTA DE INSTRUMENTOS PARA SALVAR.
                     for (int i = 0; i < salvarDados.oInstrumento.Count; i++)
                     {
-                        //salvando os instrumentos, na tabela
+                        if (salvarDados.oInstrumento[i].validade == null)
+                        {
+                            salvarDados.oInstrumento[i].validade = DateOnly.Parse("0001-01-01");
+                        }
+                        //salvando os instrumentos, na tabela                    
                         var salvarInstrumentos = new InformacaoInstrumentos
                         {
                             os = os,

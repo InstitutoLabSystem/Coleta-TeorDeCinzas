@@ -121,7 +121,13 @@
                         <td>
                             <input class="form-control" readonly value="@Model.oInstrumento[i].descricao" asp-for="oInstrumento[i].descricao" />
                         </td>
-                        <td><input class="form-control" readonly value="@Model.oInstrumento[i].validade" asp-for="oInstrumento[i].validade" /></td>
+                        @if(Model.oInstrumento[i].validade != null)
+                        {
+                            <td><input class="form-control" readonly value="@Model.oInstrumento[i].validade" asp-for="oInstrumento[i].validade" /></td>
+
+                        }else{
+                            <td><input class="form-control" readonly value="Não Requer" asp-for="oInstrumento[i].validade" /></td>
+                        }
                     </tr>
                 }
             }
@@ -134,7 +140,14 @@
                         <td>
                             <input class="form-control" readonly value="@Model.oInstrumentoInformacao[i].descricao" asp-for="oInstrumentoInformacao[i].descricao" />
                         </td>
-                        <td><input class="form-control" readonly value="@Model.oInstrumentoInformacao[i].validade" asp-for="oInstrumentoInformacao[i].validade" /></td>
+                        @if (Model.oInstrumentoInformacao[i].validade != DateOnly.Parse("0001-01-01"))
+                        {
+                            <td><input class="form-control" readonly value="@Model.oInstrumentoInformacao[i].validade" asp-for="oInstrumento[i].validade" /></td>
+                        }
+                        else
+                        {
+                            <td><input class="form-control" readonly value="Não Requer" asp-for="oInstrumento[i].validade" /></td>
+                        }
                     </tr>
                 }
             }
