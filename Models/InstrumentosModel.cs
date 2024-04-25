@@ -6,5 +6,6 @@
         public string codigo { get; set; }
         public string? descricao { get; set; }
         public DateOnly? validade { get; set; }
+        public int ativo { get; set; }
     }
 }

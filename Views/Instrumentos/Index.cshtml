@@ -68,7 +68,8 @@
                 <th>Código</th>
                 <th>Descrição</th>
                 <th>Validade</th>
-                <th>Anexo</th>       
+                <th>Anexo</th>
+                <th>Deletar</th>
             </tr>
         </thead>
         <tbody>
@@ -77,20 +78,36 @@
                 <tr>
                     <td> @Model[i].codigo </td>
                     <td> @Model[i].descricao </td>
-                    @if(Model[i].validade != null)
+                    @if (Model[i].validade != null)
                     {
                         <td>@Model[i].validade</td>
-                    }else{
+                    }
+                    else
+                    {
                         <td>Não Requer</td>
                     }
-                    
+
                     <td>
                         <a role="submit" target="_blank" class="btn btn-warning" asp-controller="Instrumentos" asp-action="InstrumentosEditar" asp-route-id="@Model[i].Id">Editar</a>
                     </td>
+                    <form method="post" asp-controller="Instrumentos" asp-action="InstrumentosExcluir" asp-route-id="@Model[i].Id">
+                    <td>
+                        <button type="submit" target="_blank" class="btn btn-danger">Excluir</button>
+                    </td>
+                    </form>
+
                 </tr>
             }
         </tbody>
     </table>
 
 </body>
+@if (TempData.ContainsKey("Mensagem"))
+{
+    <script>
+
+        alert('@Html.Raw(TempData["Mensagem"])');
+
+    </script>
+}
 </html>

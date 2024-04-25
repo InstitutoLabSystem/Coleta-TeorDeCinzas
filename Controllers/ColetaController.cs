@@ -57,7 +57,7 @@ namespace Coleta_TeorDeCinzas.Controllers
         }
         private List<InstrumentosModel> ObterInstrumentos()
         {
-            var instrumentos = _quimicoContext.instrumentos_teor_cinzas.ToList();
+            var instrumentos = _quimicoContext.instrumentos_teor_cinzas.Where(x=>x.ativo == 1).ToList();
             return instrumentos;
         }
         private List<InformacaoInstrumentos> ObterInstrumentosInformacao(string os, string orcamento)

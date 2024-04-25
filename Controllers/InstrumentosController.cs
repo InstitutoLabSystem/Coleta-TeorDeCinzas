@@ -19,7 +19,7 @@ namespace Coleta_TeorDeCinzas.Controllers
 
         public IActionResult Index()
         {
-            var dados = _quimicoContext.instrumentos_teor_cinzas.ToList();
+            var dados = _quimicoContext.instrumentos_teor_cinzas.Where(x=>x.ativo == 1).ToList();
             return View(dados);
         }
 
@@ -59,6 +59,31 @@ namespace Coleta_TeorDeCinzas.Controllers
 
             TempData["Mensagem"] = "Dados editado com sucesso";
             return View("InstrumentosEditar", editar);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InstrumentosExcluir(int? Id, InstrumentosModel excluir)
+        {
+            try
+            {
+                //pegando o id selecionado.
+                var dados = _quimicoContext.instrumentos_teor_cinzas
+                    .Where(x => x.Id == Id).FirstOrDefault();
+    
+                //passando novo valor no ativo.
+                dados.ativo = 0;
+
+                _quimicoContext.instrumentos_teor_cinzas .Update(dados);
+                await _quimicoContext.SaveChangesAsync();
+
+                TempData["Mensagem"] = "Excluido com sucesso";
+                return RedirectToAction("Index", "Instrumentos");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar usuário", ex.Message);
+                throw;
+            }
         }
     }
 }
