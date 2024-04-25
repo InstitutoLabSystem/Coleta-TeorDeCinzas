@@ -58,16 +58,17 @@
 
 </head>
 <body class="body">
+    <div>
+        <a role="submit" target="_blank" class="btn btn-success" asp-controller="Instrumentos" asp-action="InstrumentosCriar">Criar Instrumento</a>
+    </div>
+
     <table style="width: 100%;">
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Descrição</th>
                 <th>Validade</th>
-                <th>Criar</th>
-
-                <th>Anexo</th>
-               
+                <th>Anexo</th>       
             </tr>
         </thead>
         <tbody>
@@ -83,9 +84,6 @@
                         <td>Não Requer</td>
                     }
                     
-                    <td>
-                        <a role="submit" target="_blank" class="btn btn-success" asp-controller="Instrumentos" asp-action="InstrumentosCriar">Criar</a>
-                    </td>
                     <td>
                         <a role="submit" target="_blank" class="btn btn-warning" asp-controller="Instrumentos" asp-action="InstrumentosEditar" asp-route-id="@Model[i].Id">Editar</a>
                     </td>
