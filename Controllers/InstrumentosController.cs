@@ -54,6 +54,7 @@ namespace Coleta_TeorDeCinzas.Controllers
         public async Task<IActionResult> editarInstrumentos(int? Id, InstrumentosModel editar)
         {
 
+            editar.ativo = 1;
             _quimicoContext.instrumentos_teor_cinzas.Update(editar);
             await _quimicoContext.SaveChangesAsync();
 
