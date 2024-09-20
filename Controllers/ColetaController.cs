@@ -10,6 +10,7 @@ namespace Coleta_TeorDeCinzas.Controllers
     [Authorize]
     public class ColetaController : Controller
     {
+       
         private readonly ILogger<ColetaController> _logger;
         private readonly BancoContext _bancoContext;
         private readonly QuimicoContext _quimicoContext;

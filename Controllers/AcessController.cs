@@ -52,7 +52,7 @@ namespace Coleta_TeorDeCinzas.Controllers
                 {
                     if (pegarUsuario.Nome_Usuario == modelLogin.Nome_Usuario && pegarUsuario.Senha_Usuario == modelLogin.Senha_Usuario)
                     {
-                        if(pegarUsuario.setor == "Químico" || pegarUsuario.setor == "Químico" || pegarUsuario.setor == "TI")
+                        if(pegarUsuario.setor == "Químico" || pegarUsuario.setor == "Químico" || pegarUsuario.setor == "Colchão" || pegarUsuario.setor == "TI")
                         {
                             List<Claim> claims = new List<Claim>()
                                 {
